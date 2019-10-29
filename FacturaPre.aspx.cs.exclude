@@ -1,0 +1,149 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Enterprise;
+using CrystalDecisions.Shared;
+using CrystalDecisions.ReportSource;
+
+public partial class FacturaPre : System.Web.UI.Page
+{
+    ReportDocument repor = new ReportDocument();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+        if (!IsPostBack)
+        {
+           TSHAK.Components.SecureQueryString QueryString = new TSHAK.Components.SecureQueryString(new Byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 8 }, Request["data"]);
+
+            lbl_DocEntry.Text =QueryString["DocEntry"].ToString();
+            lbl_DocStatus.Text = QueryString["DocStatus"].ToString();
+
+        }
+
+        if (lbl_DocEntry.Text.Length > 0 && lbl_DocStatus.Text.Length > 0)
+        {
+
+
+            CrystalDecisions.Web.ParameterCollection Lista_Parametros = new CrystalDecisions.Web.ParameterCollection();
+
+
+            string reportPath = string.Empty;
+            if (lbl_DocStatus.Text == "C")
+            {
+                reportPath = Server.MapPath("Reporte.rpt");
+                repor.Load(reportPath);
+            }
+            else if (lbl_DocStatus.Text == "O")
+            {
+                reportPath = Server.MapPath("Reporte_Saldo_Abierto.rpt");
+                repor.Load(reportPath);
+            }
+
+
+            ConnectionInfo myConnectionInfo1 = new ConnectionInfo();
+
+            myConnectionInfo1.ServerName = "EXIMSAP";
+            myConnectionInfo1.DatabaseName = "EXIMAGEN_NUEVAB";
+            myConnectionInfo1.IntegratedSecurity = false;
+            myConnectionInfo1.UserID = "sa";
+            myConnectionInfo1.Password = "2NC]>=f.N^";
+
+            SetDBLogonForReport(myConnectionInfo1, repor);
+
+            ParameterDiscreteValue paramD1 = new ParameterDiscreteValue();
+            ParameterField paramV1 = new ParameterField();
+
+            paramV1.Name = "@DocEntry";
+            paramD1.Value = lbl_DocEntry.Text;
+
+            paramV1.CurrentValues.Add(paramD1);
+
+            repor.ParameterFields["@DocEntry"].CurrentValues.AddValue(paramD1.Value);
+
+            CrystalReportViewer1.ReportSource = repor;
+
+
+        }
+
+
+
+    }
+
+    private void SetDBLogonForReport(ConnectionInfo myConnectionInfo, ReportDocument myReportDocument)
+    {
+        Tables myTables = myReportDocument.Database.Tables;
+
+        foreach (CrystalDecisions.CrystalReports.Engine.Table myTable in myTables)
+        {
+            TableLogOnInfo myTableLogonInfo = myTable.LogOnInfo;
+            myTableLogonInfo.ConnectionInfo = myConnectionInfo;
+            myTable.ApplyLogOnInfo(myTableLogonInfo);
+
+
+        }
+
+
+    }
+
+    protected void img_btn_Descarga_Pdf_Click(object sender, ImageClickEventArgs e)
+    {
+        CrystalDecisions.Web.ParameterCollection Lista_Parametros = new CrystalDecisions.Web.ParameterCollection();
+
+        ReportDocument repor = new ReportDocument();
+        string reportPath = string.Empty;
+
+        if (lbl_DocStatus.Text == "C")
+        {
+            reportPath = Server.MapPath("Reporte.rpt");
+            repor.Load(reportPath);
+        }
+        else if (lbl_DocStatus.Text == "O")
+        {
+            reportPath = Server.MapPath("Reporte_Saldo_Abierto.rpt");
+            repor.Load(reportPath);
+        }
+
+        ConnectionInfo myConnectionInfo1 = new ConnectionInfo();
+
+        myConnectionInfo1.ServerName = "EXIMSAP";
+        myConnectionInfo1.DatabaseName = "EXIMAGEN_NUEVAB";
+        myConnectionInfo1.IntegratedSecurity = false;
+        myConnectionInfo1.UserID = "sa";
+        myConnectionInfo1.Password = "2NC]>=f.N^";
+
+        SetDBLogonForReport(myConnectionInfo1, repor);
+
+        ParameterDiscreteValue paramD1 = new ParameterDiscreteValue();
+        ParameterField paramV1 = new ParameterField();
+
+        paramV1.Name = "@DocEntry";
+        paramD1.Value = lbl_DocEntry.Text;
+
+        paramV1.CurrentValues.Add(paramD1);
+
+        repor.ParameterFields["@DocEntry"].CurrentValues.AddValue(paramD1.Value);
+
+        CrystalReportViewer1.ReportSource = repor;
+
+
+        repor.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "Factura Electronica Promoline");
+        repor.Dispose();
+
+    }
+    protected void CrystalReportViewer1_Unload(object sender, EventArgs e)
+    {
+        repor.Close();
+        repor.Dispose();
+
+    }
+}

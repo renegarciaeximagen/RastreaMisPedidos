@@ -1,0 +1,46 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="FacturaPre.aspx.cs" Inherits="FacturaPre" Culture="es-MX" %>
+
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+
+ 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Factura Promoline</title>
+    <link href="/aspnet_client/System_Web/2_0_50727/CrystalReportWebFormViewer3/css/default.css"
+        rel="stylesheet" type="text/css" />
+    <link href="/aspnet_client/System_Web/2_0_50727/CrystalReportWebFormViewer3/css/default.css"
+        rel="stylesheet" type="text/css" />
+    <link href="/aspnet_client/System_Web/2_0_50727/CrystalReportWebFormViewer3/css/default.css"
+        rel="stylesheet" type="text/css" />
+</head>
+<body style="background-color: Gray">
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
+    &nbsp;
+    <asp:Label ID="lbl_DocStatus" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lbl_DocEntry" runat="server" Visible="False"> </asp:Label>
+    <asp:Label ID="lbl_TipoDoc" runat="server" Visible="False"></asp:Label>
+    
+    <table style="width: 100%">
+        <tr>
+            <td align="center">
+                <asp:ImageButton ID="img_btn_Descarga_Pdf" runat="server" ImageUrl="~/Img/ico-pdf.gif"
+                    OnClick="img_btn_Descarga_Pdf_Click" ToolTip="Descargar PDF" />
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="top" style="background-color: White">
+                 
+                <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server"  
+                    EnableDatabaseLogonPrompt="False" EnableParameterPrompt="False" HasCrystalLogo="False"
+                    EnableToolTips="False" HasGotoPageButton="False" HasSearchButton="False" HasToggleGroupTreeButton="False"
+                    HasExportButton="False" OnUnload="CrystalReportViewer1_Unload" />
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>
+

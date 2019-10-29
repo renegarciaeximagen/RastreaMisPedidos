@@ -1,0 +1,573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="TrackingPost20" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="ConnectionString" ConnectionString="Data Source=192.168.0.6;Initial Catalog=TrackingPost20;User ID=sa;Password=2NC]>=f.N^" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Usuario" Member="Usuario">
+    <Type Name="Usuario">
+      <Column Name="UsuarioId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UsuarioDescrip" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UsuarioPassword" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UsuarioNombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Association Name="Usuario_CatUsuario" Member="CatUsuario" OtherKey="UsuarioId" Type="CatUsuario" />
+      <Association Name="Usuario_LogStatusFac20" Member="LogStatusFac20" Storage="_LogStatusFac" OtherKey="UsuarioId" Type="LogStatusFac20" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CatUsuario" Member="CatUsuario">
+    <Type Name="CatUsuario">
+      <Column Name="CatUsuarioId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UsuarioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MenuId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Permiso" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Association Name="Usuario_CatUsuario" Member="Usuario" ThisKey="UsuarioId" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Menu_CatUsuario" Member="Menu" ThisKey="MenuId" Type="Menu" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Menu" Member="Menu">
+    <Type Name="Menu">
+      <Column Name="MenuId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MenuDescripcion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="MenuPadreId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MenuPosicion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MenuIcono" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="MenuHabilitado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="MenuUrl" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="Menu_CatUsuario" Member="CatUsuario" OtherKey="MenuId" Type="CatUsuario" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LogStatusFac" Member="LogStatusFac20">
+    <Type Name="LogStatusFac20">
+      <Column Name="LogStatusFacId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LogStatusFacTimeStamp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Cat_Status_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UsuarioId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Usuario_LogStatusFac20" Member="Usuario" ThisKey="UsuarioId" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Facturas20_LogStatusFac20" Member="Facturas20" ThisKey="FacturasId" Type="Facturas20" IsForeignKey="true" />
+      <Association Name="Cat_Status_LogStatusFac20" Member="Cat_Status" ThisKey="Cat_Status_Id" Type="Cat_Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vwProduccion" Member="vwProduccion">
+    <Type Name="vwProduccion">
+      <Column Name="PerfilClie" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="HojaViaje" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FolProd" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturaSAP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFactura" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Partida" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Clave" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Cantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NC" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Neto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Buffer" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Vales" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Suma" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaEntrega" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DocEntry" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CheckBox" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cat_NumTransp" Member="Cat_NumTransp">
+    <Type Name="Cat_NumTransp">
+      <Column Name="NumTransID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TransDesc" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Association Name="Cat_NumTransp_Transfer" Member="Transfer" OtherKey="NumTransID" Type="Transfer" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FacturasPartidas" Member="FacturasPartidas20">
+    <Type Name="FacturasPartidas20">
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Clave" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Descripcion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Cantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Bufer" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Pedimiento" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FacturasPartidas_Produccion" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_OrdenDiseno" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacturasPartidas_DifNotaCre" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Producidos" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Surtido1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacturasPartidas_Recibido1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacturasPartidas_Surtido2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacturasPartidas_Recibido2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacturasPartidas_Surtido3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacturasPartidas_Recibido3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BackOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Embarcado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="FacturasPartidas20_Tipificacion20" Member="Tipificacion20" OtherKey="FacturasId,FacturasPartidas_Id" Type="Tipificacion20" />
+      <Association Name="FacturasPartidas20_Produccion20" Member="Produccion20" OtherKey="FacturasId,FacturasPartidas_Id" Type="Produccion20" />
+      <Association Name="Facturas20_FacturasPartidas20" Member="Facturas20" ThisKey="FacturasId" Type="Facturas20" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransferPartidas" Member="TransferPartidas">
+    <Type Name="TransferPartidas">
+      <Column Name="TransferPartidaId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TransferID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BultosEnviados" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BultosRecibidos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AlmOri" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="AlmDest" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo_OUT" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Tipo_IN" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Facturas20_TransferPartidas" Member="Facturas20" ThisKey="FacturasId" Type="Facturas20" IsForeignKey="true" />
+      <Association Name="Transfer_TransferPartidas" Member="Transfer" ThisKey="TransferID" Type="Transfer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vwCredito" Member="vwCredito">
+    <Type Name="vwCredito">
+      <Column Name="HojaViaje" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturaSAP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CardCode" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="CardName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CondPago" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="FechFact" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DocTotal" Type="System.Decimal" DbType="Decimal(19,6)" CanBeNull="true" />
+      <Column Name="SaldoFact" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="LineaCredito" Type="System.Decimal" DbType="Decimal(19,6)" CanBeNull="true" />
+      <Column Name="SaldoAbierto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SaldoVencido" Type="System.Decimal" DbType="Decimal(19,6)" CanBeNull="true" />
+      <Column Name="TipoVal" Type="System.Char" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Perfil" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="CheckBox" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StaCred" Type="System.Char" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LogXml" Member="LogXml">
+    <Type Name="LogXml">
+      <Column Name="idLogXml" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LogXml_NombreXml" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="LogXml_Dir_Xml" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="LogXml_Dir_XmlOK" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="LogXml_Up" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="LogXml_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LogXml_TrasId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LogXml_FacturasId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ConvetirFlete" Member="ConvetirFlete">
+    <Type Name="ConvetirFlete">
+      <Column Name="ConvFleId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ConvFleFacturaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ConvFleFacturaRel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ConvFleUsuAuto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ConvFleComent" Type="System.String" DbType="NVarChar(2500)" CanBeNull="true" />
+      <Column Name="ConvFleFecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Facturas" Member="Facturas20">
+    <Type Name="Facturas20">
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Facturas_DocEntry" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_DocNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_CardCode" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_CardName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_Address" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_ZipCode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Facturas_DocDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_DirEmbar" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_SlpCode" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_ImplicaProduccion" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_TipoPago" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_PlazoDias" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_FechaVencimiento" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_WhsCode" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="Facturas_Territorio" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="Facturas_Perfil" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="Facturas_TipoEntrega" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Facturas_AlmEmb" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="Facturas_Cancel" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_PaqueteraId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Facturas20_LogStatusFac20" Member="LogStatusFac20" OtherKey="FacturasId" Type="LogStatusFac20" />
+      <Association Name="Facturas20_FacturasPartidas20" Member="FacturasPartidas20" OtherKey="FacturasId" Type="FacturasPartidas20" />
+      <Association Name="Facturas20_TransferPartidas" Member="TransferPartidas" OtherKey="FacturasId" Type="TransferPartidas" />
+      <Association Name="Facturas20_Embarque20" Member="Embarque20" OtherKey="FacturasId" Type="Embarque20" />
+      <Association Name="Facturas20_DocumentosRelacio20" Member="DocumentosRelacio20" OtherKey="FacturasId" Type="DocumentosRelacio20" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tipificacion" Member="Tipificacion20">
+    <Type Name="Tipificacion20">
+      <Column Name="TipificacionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipificacionCantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CatStatusAlmaKNid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacturasPartidas_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CatTificacionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BultosProd" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="FacturasPartidas20_Tipificacion20" Member="FacturasPartidas20" ThisKey="FacturasId,FacturasPartidas_Id" Type="FacturasPartidas20" IsForeignKey="true" />
+      <Association Name="CatTificacion_Tipificacion20" Member="CatTificacion" ThisKey="CatTificacionId" Type="CatTificacion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CatTificacion" Member="CatTificacion">
+    <Type Name="CatTificacion">
+      <Column Name="CatTificacionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CatTificacionDescripcion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="CatTificacion_Tipificacion20" Member="Tipificacion20" OtherKey="CatTificacionId" Type="Tipificacion20" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Transfer" Member="Transfer">
+    <Type Name="Transfer">
+      <Column Name="TransferId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Placas" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Sello" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="NumTransID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalBultos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaHoraEnvio" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Transfer_TransferPartidas" Member="TransferPartidas" OtherKey="TransferID" Type="TransferPartidas" />
+      <Association Name="Cat_NumTransp_Transfer" Member="Cat_NumTransp" ThisKey="NumTransID" Type="Cat_NumTransp" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Embarque" Member="Embarque20">
+    <Type Name="Embarque20">
+      <Column Name="EmbarqueId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmbarqueTimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmbarqueGuia" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="EmbarquePaquetera" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="EmbarqueFechaEntrega" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EmbarqueEnvieBultos" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="EmbarqueAlmEmb" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="EntregaNotas" Type="System.String" DbType="NVarChar(2500)" CanBeNull="true" />
+      <Association Name="Facturas20_Embarque20" Member="Facturas20" ThisKey="FacturasId" Type="Facturas20" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cat_Status" Member="Cat_Status">
+    <Type Name="Cat_Status">
+      <Column Name="Cat_Status_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Cat_Status_Orden" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Cat_Status_Descrip" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="Cat_Status_LogStatusFac20" Member="LogStatusFac20" OtherKey="Cat_Status_Id" Type="LogStatusFac20" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrasMan" Member="TrasMan20">
+    <Type Name="TrasMan20">
+      <Column Name="TrasManId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TrasManAlmacenOri" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManAlmacenDes" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="CatConcepTransManId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManFacturaRelaci" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrasManDicTamen" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManObserv" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="TrasManObservRecep" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrasManPartidas" Member="TrasManPartidas20">
+    <Type Name="TrasManPartidas20">
+      <Column Name="TrasManId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TrasManPartidas_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TrasManPartidasClavePro" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidasDescrip" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidasCantidadEnvia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidasLotes" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TrasManPartidasCantidadRecib" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrasManPartidasDiferencia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrasManPartidasFacRelacio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SubUsuSolicita" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SubUsuRecibe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SubUsuAutoriza" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrasManPartidasIdSAP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LogTrasMan" Member="LogTrasMan20">
+    <Type Name="LogTrasMan20">
+      <Column Name="LogTrasManId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TransManId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LogTrasManTimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CatStatusTrasManId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DocumentosRelacio" Member="DocumentosRelacio20">
+    <Type Name="DocumentosRelacio20">
+      <Column Name="DocumentosRelacioId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CatDcumentosId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocumentosRelacioFolio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Facturas20_DocumentosRelacio20" Member="Facturas20" ThisKey="FacturasId" Type="Facturas20" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vwFactura" Member="vwFactura">
+    <Type Name="vwFactura">
+      <Column Name="PerfilClie" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="HojaViaje" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturaSAP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFactura" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Cliente" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="N_Cliente" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="SlpCode" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="SlpName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Produccion" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EstDesc" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaEntrega" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AlmacenFact" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="AlmacenEmb" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="TipoEntregaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipoDeEntrega" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="DocEntry" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PaqueteraId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Paquetera" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Cancelada" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="CheckBox" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ODA" Type="System.Char" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="OKA" Type="System.Char" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="BultosProd" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Bultos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Produccion" Member="Produccion20">
+    <Type Name="Produccion20">
+      <Column Name="ProduccionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProduccionTimeStam" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ProduccionEstatus" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="ProduccionBultos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="FacturasPartidas20_Produccion20" Member="FacturasPartidas20" ThisKey="FacturasId,FacturasPartidas_Id" Type="FacturasPartidas20" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vwPartidas" Member="vwPartidas">
+    <Type Name="vwPartidas">
+      <Column Name="PerfilClie" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="HojaViaje" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturaSAP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFactura" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Cliente" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="FolProd" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PartProd" Type="System.Char" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Partida" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Clave" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Cantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NC" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Buffer" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Neto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Vales" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Estatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaEntrega" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DocEntry" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CheckBox" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Surtido1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Recibido1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Surtido2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Recibido2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Surtido3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Recibido3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BackOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Embarcado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProduccionEstatus" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="Bultos" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.UltStatusFact" Method="UltStatusFact" IsComposable="true">
+    <Parameter Name="FacturasId" Parameter="facturasId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.StatusAntFact" Method="StatusAntFact" IsComposable="true">
+    <Parameter Name="FacturasId" Parameter="facturasId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Status1" Parameter="status1" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Status2" Parameter="status2" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.FactProd" Method="FactProd" IsComposable="true">
+    <Parameter Name="FacturasId" Parameter="facturasId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.UltStatusFactExFlo" Method="UltStatusFactExFlo" IsComposable="true">
+    <Parameter Name="FacturasId" Parameter="facturasId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spValFactFlete" Method="spValFactFlete">
+    <Parameter Name="DocNum" Parameter="docNum" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CardCode" Parameter="cardCode" Type="System.String" DbType="VarChar(12)" />
+    <ElementType Name="spValFactFleteResult">
+      <Column Name="DocNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CardCode" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_post_CalculaTime" Method="sp_post_CalculaTime">
+    <Parameter Name="FechaInicio" Parameter="fechaInicio" Type="System.String" DbType="NVarChar(40)" />
+    <Parameter Name="FechaFin" Parameter="fechaFin" Type="System.String" DbType="NVarChar(40)" />
+    <ElementType Name="sp_post_CalculaTimeResult">
+      <Column Name="diferencia_en_segundos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Horas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Minutos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Segundos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_post_SelecVales" Method="sp_post_SelecVales">
+    <Parameter Name="iFacturasId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_post_SelecValesResult">
+      <Column Name="TrasManId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidasClavePro" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidasCantidadEnvia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidasFacRelacio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_post_CatStatusAlmaKN_SelectUsu" Method="sp_post_CatStatusAlmaKN_SelectUsu">
+    <Parameter Name="iUsuarioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_post_CatStatusAlmaKN_SelectUsuResult">
+      <Column Name="AlmacenOrigen" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descrip" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_post_TrasMan_SelectFolio" Method="sp_post_TrasMan_SelectFolio">
+    <ElementType Name="sp_post_TrasMan_SelectFolioResult">
+      <Column Name="TrasManId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_post_CatStatusAlmaKN_SelectAlmDes" Method="sp_post_CatStatusAlmaKN_SelectAlmDes">
+    <Parameter Name="iUsuarioId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="iSubAlmacenOrigen" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_post_CatStatusAlmaKN_SelectAlmDesResult">
+      <Column Name="CatStatusAlmaKNid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CatStatusAlmaKNRelacionId" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="CatStatusAlmaKNDescripcion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="SubAlmacenOrigen" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubAlmacenDestino" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubUsuSolicita" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubUsuRecibe" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_post_Facturas_SelectProVale" Method="sp_post_Facturas_SelectProVale">
+    <Parameter Name="iFacturas_DocNum" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_post_Facturas_SelectProValeResult">
+      <Column Name="ProduccionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_CardCode" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_DocNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Clave" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_DescripCion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Cantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Bufer" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_OrdenDiseno" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Folio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_post_Tipificacion_SelecTrasLa" Method="sp_post_Tipificacion_SelecTrasLa">
+    <Parameter Name="iCatStatusAlmaKNid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_post_Tipificacion_SelecTrasLaResult">
+      <Column Name="TipificacionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Facturas_DocNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipificacionCantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CatStatusAlmaKNid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CatStatusAlmaKNDescripcion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CatTificacionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CatTificacionDescripcion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_Clave" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FacturasPartidas_DescripCion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_post_CatStatusAlmaKN_SelectOne" Method="sp_post_CatStatusAlmaKN_SelectOne">
+    <Parameter Name="iCatStatusAlmaKNid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_post_CatStatusAlmaKN_SelectOneResult">
+      <Column Name="CatStatusAlmaKNid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CatStatusAlmaKNSatus" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="CatStatusAlmaKNDescripcion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CatStatusAlmaKNidSAP" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ConsultaAlmcen" Method="sp_ConsultaAlmcen">
+    <Parameter Name="ItemCode" Parameter="itemCode" Type="System.String" DbType="VarChar(11)" />
+    <Parameter Name="WhsCode" Parameter="whsCode" Type="System.String" DbType="VarChar(2)" />
+    <ElementType Name="sp_ConsultaAlmcenResult">
+      <Column Name="OnHand" Type="System.Decimal" DbType="Decimal(0,0)" CanBeNull="true" />
+      <Column Name="WhsCode" Type="System.String" DbType="NVarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="WhsName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ItemCode" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_post_TrasMan_Insert" Method="sp_post_TrasMan_Insert">
+    <Parameter Name="siTrasManAlmacenOri" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="siTrasManAlmacenDes" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="iCatConcepTransManId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="iTrasManFacturaRelaci" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sTrasManDicTamen" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="sTrasManObserv" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="sTrasManObservRecep" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="iTrasManId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_TrasMan_Selec" Method="sp_TrasMan_Selec">
+    <Parameter Name="iUsuarioId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_TrasMan_SelecResult">
+      <Column Name="TrasManId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManAlmacenOri" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManAlmacenOriDes" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="TrasManAlmacenDes" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManAlmacenDesDes" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="CatConcepTransManId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CatConcepTransManDescrip" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="CatStatusTrasManId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CatStatusTrasManDescrip" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="SubUsuRecibe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_post_TrasManPartidas_SelectOne" Method="sp_post_TrasManPartidas_SelectOne">
+    <Parameter Name="iTrasManId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_post_TrasManPartidas_SelectOneResult">
+      <Column Name="TrasManId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidas_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidasClavePro" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidasDescrip" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidasCantidadEnvia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrasManPartidasLotes" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TrasManPartidasCantidadRecib" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrasManPartidasDiferencia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrasManPartidasFacRelacio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SubUsuRecibe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SubUsuSolicita" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SubUsuAutoriza" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrasManPartidasIdSAP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrasladosDocEntry" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrasladosDocNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ProducccionesCerradas" Method="ProducccionesCerradas" IsComposable="true">
+    <Parameter Name="HojaViaje" Parameter="hojaViaje" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_post_TrasManPartidas_SelectTrasVale" Method="sp_post_TrasManPartidas_SelectTrasVale">
+    <Parameter Name="iTrasManId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_post_TrasManPartidas_SelectTrasValeResult">
+      <Column Name="Partida" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocEntry" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
+      <Column Name="almacenOrigen" Type="System.String" DbType="NVarChar(8)" CanBeNull="true" />
+      <Column Name="IdCatOri" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DesOri" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="almacenDestino" Type="System.String" DbType="NVarChar(8)" CanBeNull="true" />
+      <Column Name="IdCatDest" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DesDestino" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Itemcode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Dscription" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.RasteoEstatusSAP" Method="RasteoEstatusSAP" IsComposable="true">
+    <Parameter Name="DocEntry" Parameter="docEntry" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_post_DocumentosRelacio_SelectDoc" Method="sp_post_DocumentosRelacio_SelectDoc">
+    <Parameter Name="iFacturasId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_post_DocumentosRelacio_SelectDocResult">
+      <Column Name="FacTurasId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocumentosRelacioFolio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CatDcumentosDescripcion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CatDcumentosId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocStatus" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ODNombreLogo" Method="ODNombreLogo" IsComposable="true">
+    <Parameter Name="Id_od" Parameter="id_od" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+</Database>

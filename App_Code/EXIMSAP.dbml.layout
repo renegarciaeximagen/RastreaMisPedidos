@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 13.75, 85.875" name="EXIMSAP">
+  <DataContextMoniker Name="/EXIMSAPDataContext" />
+  <nestedChildShapes>
+    <classShape Id="212e2dfb-df7b-4fa8-b283-e019df4cbbb1" absoluteBounds="11.5, 4.25, 2, 81.383689778645817">
+      <DataClassMoniker Name="/EXIMSAPDataContext/OCRD" />
+      <nestedChildShapes>
+        <elementListCompartment Id="10fb40d2-5fff-4282-b1c2-46d95195f486" absoluteBounds="11.515, 4.71, 1.9700000000000002, 80.823689778645829" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
